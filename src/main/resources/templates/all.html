@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>همه یادداشت‌ها</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --info: #3498db;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .navbar {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .notes-section {
+            padding: 100px 0 60px;
+        }
+
+        .notes-header {
+            margin-bottom: 30px;
+        }
+
+        .notes-title {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .notes-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .notes-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            color: #dee2e6;
+            margin-bottom: 20px;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .empty-message {
+            margin-bottom: 20px;
+        }
+
+        .pagination-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-item {
+            list-style: none;
+        }
+
+        .page-link {
+            display: block;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .page-item.active .page-link {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .footer {
+            background: var(--dark);
+            color: #adb5bd;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #495057;
+            color: #868e96;
+            font-size: 0.9rem;
+        }
+
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notes-section {
+                padding: 60px 0 40px;
+            }
+
+            .notes-title {
+                font-size: 2rem;
+            }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#" style="color: var(--primary);">
+            <i class="fas fa-sticky-note me-2"></i>دفترچه یادداشت
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">صفحه اصلی</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add.html">افزودن یادداشت</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="all.html">همه یادداشت‌ها</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+ <section class="notes-section">
+    <div class="container">
+        <div class="notes-header">
+            <h1 class="notes-title">همه یادداشت‌ها</h1>
+            <p class="notes-subtitle">مدیریت و دسترسی آسان به تمام یادداشت‌های شما</p>
+        </div>
+<!--
+        <div class="notes-controls">
+            <div class="search-container">
+                <input type="text"
+                       class="search-input"
+                       id="searchInput"
+                       placeholder="جستجو در یادداشت‌ها..."
+                       onkeyup="filterNotes()">
+            </div>
+-->
+            <a href="add.html" class="btn-add">
+                <i class="fas fa-plus-circle me-2"></i>یادداشت جدید
+            </a>
+        </div>
+
+        <div id="notesContainer" class="notes-grid">
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-icon">
+                <i class="far fa-sticky-note"></i>
+            </div>
+            <h3 class="empty-title">هیچ یادداشتی وجود ندارد</h3>
+            <p class="empty-message">برای شروع، اولین یادداشت خود را اضافه کنید.</p>
+            <a href="add.html" class="btn btn-primary">
+                <i class="fas fa-plus-circle me-2"></i>افزودن یادداشت
+            </a>
+        </div>
+
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="قبلی">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="بعدی">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-links">
+            <a href="home.html">صفحه اصلی</a>
+            <a href="add.html">افزودن یادداشت</a>
+            <a href="all.html">همه یادداشت‌ها</a>
+            <a href="#">درباره ما</a>
+        </div>
+        <div class="copyright">
+            &copy; 2024 دفترچه یادداشت. taha kargozar
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script>
+</script>
+</body>
+</html>
+
