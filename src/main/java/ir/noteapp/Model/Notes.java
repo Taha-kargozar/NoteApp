@@ -7,38 +7,37 @@ import jakarta.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class Notes {
-    private String title;
-    private int id;
-    private String content;
+    private String titleNote;
+    private int idNote;
+    private String contentNote;
     private LocalDateTime DateCreated;
 
-    public String getTitle() {
-        return title;
+    public String getTitleNote() {
+        return titleNote;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitleNote(String title) {
+        this.titleNote = title;
     }
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return id;
+    public int getIdNote() {
+        return idNote;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdNote(int idNote) {
+        this.idNote = idNote;
     }
 
-    public String getContent() {
-        return content;
+    public String getContentNote() {
+        return contentNote;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentNote(String content) {
+        this.contentNote = content;
     }
 @CreationTimestamp
     public LocalDateTime getDateCreated() {

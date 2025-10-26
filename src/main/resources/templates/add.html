@@ -194,16 +194,16 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" idNote="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="home.html">صفحه اصلی</a>
+                    <a class="nav-link" href="http://localhost:8080/page/">صفحه اصلی</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="add.html">افزودن یادداشت</a>
+                    <a class="nav-link active" href="http://localhost:8080/page/add">افزودن یادداشت</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="all.html">همه یادداشت‌ها</a>
+                    <a class="nav-link" href="http://localhost:8080/page/all">همه یادداشت‌ها</a>
                 </li>
             </ul>
         </div>
@@ -217,20 +217,20 @@
                 <div class="form-card">
                     <h1 class="form-title">افزودن یادداشت جدید</h1>
 
-                    <form id="noteForm">
+                    <form idNote="noteForm">
                         <div class="mb-4">
-                            <label for="noteTitle" class="form-label">عنوان یادداشت *</label>
+                            <label class="form-label">عنوان یادداشت *</label>
                             <input type="text"
                                    class="form-control"
-                                   id="noteTitle"
+                                   idNote="noteTitle"
                                    placeholder="عنوان یادداشت خود را وارد کنید..."
                                    required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="noteContent" class="form-label">محتوای یادداشت *</label>
+                            <label class="form-label">محتوای یادداشت *</label>
                             <textarea class="form-control"
-                                      id="noteContent"
+                                      idNote="noteContent"
                                       placeholder="محتوای یادداشت خود را وارد کنید..."
                                       required></textarea>
                         </div>
@@ -253,9 +253,9 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-links">
-            <a href="home.html">صفحه اصلی</a>
-            <a href="add.html">افزودن یادداشت</a>
-            <a href="all.html">همه یادداشت‌ها</a>
+            <a href="http://localhost:8080/page/">صفحه اصلی</a>
+            <a href="http://localhost:8080/page/add">افزودن یادداشت</a>
+            <a href="http://localhost:8080/page/all">همه یادداشت‌ها</a>
             <a href="#">درباره ما</a>
             <a href="#">تماس با ما</a>
         </div>

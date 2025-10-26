@@ -4,8 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record NoteDto (
-        @NotBlank(message = "title.is.blank")
-        String title,
-        @NotNull(message = "content.is.null")
-        String content
+        @NotBlank(message = "titleNote.is.blank")
+        String titleNote,
+        @NotNull(message = "contentNote.is.null")
+        String contentNote
 ) {}

@@ -17,14 +17,13 @@ public class NoteController {
     public NoteController(NoteService noteService) {
         this.noteService = noteService;
     }
-
     @PostMapping("/add")
     public ResponseEntity<Integer> save(@RequestBody @Valid NoteDto noteDto) {
         Notes notes = new Notes();
-        notes.setTitle(noteDto.title());
-        notes.setContent(noteDto.content());
+        notes.setTitleNote(noteDto.titleNote());
+        notes.setContentNote(noteDto.contentNote());
         noteService.saveNote(notes);
-        return ResponseEntity.ok(notes.getId());
+        return ResponseEntity.ok(notes.getIdNote());
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
@@ -39,10 +38,10 @@ public class NoteController {
     @PostMapping("/update/{id}")
     public ResponseEntity<Integer> update(@PathVariable int id ,@RequestBody @Valid NoteDto noteDto) {
         Notes notes = noteService.getbyId(id);
-        notes.setContent(noteDto.content());
-        notes.setTitle(noteDto.title());
+        notes.setContentNote(noteDto.contentNote());
+        notes.setTitleNote(noteDto.titleNote());
         noteService.saveNote(notes);
-        return ResponseEntity.ok().body(notes.getId());
+        return ResponseEntity.ok().body(notes.getIdNote());
     }
     @PostMapping("/findbyId/{id}")
     public ResponseEntity<Notes> findbyId(@PathVariable int id) {
