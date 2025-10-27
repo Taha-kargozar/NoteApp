@@ -194,7 +194,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" idNote="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/page/">صفحه اصلی</a>
@@ -217,12 +217,12 @@
                 <div class="form-card">
                     <h1 class="form-title">افزودن یادداشت جدید</h1>
 
-                    <form idNote="noteForm">
+                    <form id="noteForm">
                         <div class="mb-4">
                             <label class="form-label">عنوان یادداشت *</label>
                             <input type="text"
                                    class="form-control"
-                                   idNote="noteTitle"
+                                   id="noteTitle"
                                    placeholder="عنوان یادداشت خود را وارد کنید..."
                                    required>
                         </div>
@@ -230,7 +230,7 @@
                         <div class="mb-4">
                             <label class="form-label">محتوای یادداشت *</label>
                             <textarea class="form-control"
-                                      idNote="noteContent"
+                                      id="noteContent"
                                       placeholder="محتوای یادداشت خود را وارد کنید..."
                                       required></textarea>
                         </div>
@@ -268,6 +268,61 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    document.getElementById('noteForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        console.log('noteForm:', document.getElementById('noteForm'));
+        console.log('noteTitle:', document.getElementById('noteTitle'));
+        console.log('noteContent:', document.getElementById('noteContent'));
+        console.log('submitBtn:', document.querySelector('.btn-submit'));
+        const title = document.getElementById('noteTitle').value.trim();
+        const content = document.getElementById('noteContent').value.trim();
+
+        if (!title) return showAlert('عنوان الزامی است.', 'danger');
+
+        const submitBtn = document.querySelector('.btn-submit');
+        console.log('submitBtn found:', submitBtn); // برای دیباگ
+
+        if (!submitBtn) {
+            console.error('دکمه submit پیدا نشد!');
+            return;
+        }
+
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> در حال ثبت...';
+        submitBtn.disabled = true;
+
+        const note = {
+            titleNote: document.getElementById("noteTitle").value.trim(),
+            contentNote : document.getElementById("noteContent").value || '',
+        }
+        console.log( note, "در حال ارسال")
+        try {
+            const response = await fetch('http://localhost:8080/note/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    note
+                )
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                showAler(`تسک "${result.title || title}" ثبت شد!`, 'success');
+                document.getElementById('noteForm').reset();
+                console.log("ارسال شد")
+            } else {
+                const error = await response.json();
+                showAlert(error.message || 'ثبت ناموفق', 'danger');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
 
 </script>
 </body>
