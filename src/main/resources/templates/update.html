@@ -289,11 +289,6 @@
         document.addEventListener('DOMContentLoaded', async function () {
             const urlParams = new URLSearchParams(window.location.search);
             const noteId = urlParams.get('id');
-            console.log('📍 آدرس کامل:', window.location.href);
-            console.log('📍 پارامترهای URL:', window.location.search);
-            console.log('📍 مسیر:', window.location.pathname);
-
-            console.log(noteId)
             if (!noteId) {
                 showAlert('ID تسک مشخص نیست!', 'danger');
                 return;
@@ -320,7 +315,7 @@
                 document.getElementById('noteContent').value = note.contentNote || '';
 
             } catch (error) {
-                console.error('❌ خطای دقیق:', error);
+                console.error(' خطای دقیق:', error);
                 showAlert(`خطا: ${error.message}`, 'danger');
                 return;
             }

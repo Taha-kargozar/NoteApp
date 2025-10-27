@@ -1,5 +1,6 @@
 package ir.noteapp.Service;
 
+import ir.noteapp.Execption.NotFound;
 import ir.noteapp.Model.Notes;
 import ir.noteapp.Repo.NoteRepo;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Notes getbyId(int id) {
         return noteRepo.findById(id)
-                .orElseThrow(()-> new RuntimeException("todo.not.found"));
+                .orElseThrow(()-> new NotFound("todo.not.found"));
     }
 
     @Override
