@@ -35,7 +35,7 @@ public class NoteController {
         Page<Notes> notesPage = noteService.getAllNotes(pageable);
         return ResponseEntity.ok(notesPage);
     }
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Integer> update(@PathVariable int id ,@RequestBody @Valid NoteDto noteDto) {
         Notes notes = noteService.getbyId(id);
         notes.setContentNote(noteDto.contentNote());
@@ -43,7 +43,7 @@ public class NoteController {
         noteService.saveNote(notes);
         return ResponseEntity.ok().body(notes.getIdNote());
     }
-    @PostMapping("/findbyId/{id}")
+    @GetMapping("/findbyId/{id}")
     public ResponseEntity<Notes> findbyId(@PathVariable int id) {
         Notes notes = noteService.getbyId(id);
         return ResponseEntity.ok(notes);

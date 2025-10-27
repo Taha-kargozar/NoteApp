@@ -1,0 +1,371 @@
+ <!DOCTYPE html>
+    <html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>تغییر یادداشت</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <style>
+            :root {
+                --primary: #4361ee;
+                --secondary: #3a0ca3;
+                --success: #4cc9f0;
+                --light: #f8f9fa;
+                --dark: #212529;
+                --gray: #6c757d;
+            }
+
+            body {
+                font-family: 'Vazirmatn', sans-serif;
+                background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+                min-height: 100vh;
+                color: var(--dark);
+            }
+
+            .navbar {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(10px);
+            }
+
+            .note-form-section {
+                padding: 100px 0;
+            }
+
+            .form-card {
+                background: white;
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .form-title {
+                text-align: center;
+                color: var(--secondary);
+                margin-bottom: 30px;
+                font-size: 2.5rem;
+                font-weight: 700;
+                position: relative;
+            }
+
+            .form-title::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                right: 50%;
+                transform: translateX(50%);
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary), var(--secondary));
+                border-radius: 2px;
+            }
+
+            .form-label {
+                font-weight: 600;
+                color: var(--dark);
+                margin-bottom: 8px;
+            }
+
+            .form-control, .form-control:focus {
+                border: 2px solid #e9ecef;
+                border-radius: 12px;
+                padding: 12px 16px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+            }
+
+            .form-control:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+            }
+
+            textarea.form-control {
+                min-height: 200px;
+                resize: vertical;
+                line-height: 1.6;
+            }
+
+            .btn-submit {
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                border: none;
+                padding: 14px 30px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                border-radius: 12px;
+                width: 100%;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            }
+
+            .btn-submit:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+            }
+
+            .btn-cancel {
+                background: transparent;
+                border: 2px solid #e9ecef;
+                color: var(--gray);
+                padding: 14px 30px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                border-radius: 12px;
+                width: 100%;
+                transition: all 0.3s ease;
+            }
+
+            .btn-cancel:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+                transform: translateY(-2px);
+            }
+
+            .form-footer {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                margin-top: 30px;
+            }
+
+            .footer {
+                background: var(--dark);
+                color: #adb5bd;
+                padding: 40px 0 20px;
+                margin-top: 100px;
+            }
+
+            .footer-links {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .footer-links a {
+                color: #adb5bd;
+                text-decoration: none;
+                margin: 0 15px;
+                transition: color 0.3s ease;
+            }
+
+            .footer-links a:hover {
+                color: white;
+            }
+
+            .copyright {
+                text-align: center;
+                padding-top: 20px;
+                margin-top: 20px;
+                border-top: 1px solid #495057;
+                color: #868e96;
+                font-size: 0.9rem;
+            }
+
+            @media (max-width: 768px) {
+                .form-card {
+                    padding: 30px 20px;
+                    margin: 0 15px;
+                }
+
+                .form-title {
+                    font-size: 2rem;
+                }
+
+                .form-footer {
+                    grid-template-columns: 1fr;
+                }
+
+                .note-form-section {
+                    padding: 60px 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#" style="color: var(--primary);">
+                <i class="fas fa-sticky-note me-2"></i>دفترچه یادداشت
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/page/">صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://localhost:8080/page/add">افزودن یادداشت</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/page/all">همه یادداشت‌ها</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="note-form-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-card">
+                        <h1 class="form-title">تغییر یادداشت</h1>
+
+                        <form id="noteForm">
+                            <div class="mb-4">
+                                <label class="form-label">عنوان یادداشت *</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="noteTitle"
+                                       placeholder="عنوان یادداشت خود را وارد کنید..."
+                                       required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">محتوای یادداشت *</label>
+                                <textarea class="form-control"
+                                          id="noteContent"
+                                          placeholder="محتوای یادداشت خود را وارد کنید..."
+                                          required></textarea>
+                            </div>
+
+                            <div class="form-footer">
+                                <button type="submit" class="btn-submit">
+                                    <i class="fas fa-save me-2"></i>ذخیره یادداشت
+                                </button>
+                                <button type="button" class="btn-cancel" onclick="goBack()">
+                                    <i class="fas fa-times me-2"></i>لغو
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="http://localhost:8080/page/">صفحه اصلی</a>
+                <a href="http://localhost:8080/page/add">افزودن یادداشت</a>
+                <a href="http://localhost:8080/page/all">همه یادداشت‌ها</a>
+                <a href="#">درباره ما</a>
+                <a href="#">تماس با ما</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 taha kargozar
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 100px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 300px; text-align: center;';
+            alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+
+            document.body.appendChild(alertDiv);
+
+            // حذف خودکار بعد از 5 ثانیه
+            setTimeout(() => {
+                if (alertDiv.parentElement) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const noteId = urlParams.get('id');
+            console.log('📍 آدرس کامل:', window.location.href);
+            console.log('📍 پارامترهای URL:', window.location.search);
+            console.log('📍 مسیر:', window.location.pathname);
+
+            console.log(noteId)
+            if (!noteId) {
+                showAlert('ID تسک مشخص نیست!', 'danger');
+                return;
+            }
+
+            const form = document.getElementById('noteForm');
+            const submitBtn = form.querySelector('.btn-submit');
+
+            let task = null;
+
+            try {
+                const response = await fetch(`http://localhost:8080/note/findbyId/${noteId}`);
+                console.log('وضعیت پاسخ:', response.status);
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('پاسخ خطا:', errorText);
+                    throw new Error(`دریافت ناموفق: ${response.status} - ${errorText}`);
+                }
+
+                note = await response.json();
+                console.log('داده دریافتی:', task);
+
+                document.getElementById('noteTitle').value = note.titleNote || '';
+                document.getElementById('noteContent').value = note.contentNote || '';
+
+            } catch (error) {
+                console.error('❌ خطای دقیق:', error);
+                showAlert(`خطا: ${error.message}`, 'danger');
+                return;
+            }
+
+            // سابمیت فرم
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const title = document.getElementById('noteTitle').value.trim();
+                const content = document.getElementById('noteContent').value.trim();
+
+                if (!title) return showAlert('عنوان الزامی است.', 'danger');
+
+                // غیرفعال کردن دکمه
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'در حال به‌روزرسانی...';
+
+                try {
+                    const response = await fetch(`http://localhost:8080/note/update/${noteId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            titleNote: title,
+                            contentNote: content,
+                        })
+                    });
+
+                    if (response.ok) {
+                        showAlert('تسک با موفقیت به‌روزرسانی شد!', 'success');
+                        setTimeout(goBack, 1000);
+                    } else {
+                        const errorText = await response.text();
+                        showAlert(`خطا: ${errorText}`, 'danger');
+                    }
+                } catch (error) {
+                    showAlert(`اتصال ناموفق: ${error.message}`, 'danger');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            });
+        });
+    </script>
+    </body>
+ </html>

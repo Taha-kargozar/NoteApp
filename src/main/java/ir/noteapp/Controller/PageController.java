@@ -21,4 +21,7 @@ public class PageController {
     public String add() {
         return "add";
     }
+
+    @GetMapping("/update")
+    public String update() {return "update";}
 }
